@@ -2,8 +2,6 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.Lotto;
-import lotto.service.LottoBonusService;
-import lotto.service.LottoInputDrawNumberService;
 import lotto.service.LottoPublishService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -39,6 +37,7 @@ public class LottoController {
     private void lottoPublish() {
         List<Lotto> lottos = lottoPublishService.getPublishedLottoNumbers();
         outputView.printPublishCount(lottos.size());
+        outputView.printPublishedLottoNumbers(lottoPublishService.getPublishedLottoNumbers());
     }
 }
 

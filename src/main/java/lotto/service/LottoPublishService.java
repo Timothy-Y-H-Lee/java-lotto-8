@@ -2,7 +2,9 @@ package lotto.service;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.Lotto;
 import lotto.enums.LottoRule;
 import lotto.enums.UserInterfaceMessage;
@@ -13,6 +15,10 @@ public class LottoPublishService {
     private Integer boughtLottoCount;
 
     private LottoPublishService() {
+    }
+
+    public Integer getLottoPrice() {
+        return lottoPrice;
     }
 
     private static class LottoPublishServiceHolder {
@@ -46,6 +52,7 @@ public class LottoPublishService {
         List<Integer> numbers = Randoms.pickUniqueNumbersInRange(LottoRule.START.getValue(),
                 LottoRule.END.getValue(),
                 LottoRule.LOTTO_MAX_COUNT.getValue());
+        numbers.sort(Comparator.naturalOrder());
         publishedLottoNumbers.add(new Lotto(numbers));
     }
 
