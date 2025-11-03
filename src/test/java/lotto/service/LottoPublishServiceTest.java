@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import lotto.Lotto;
+import lotto.repository.Lotto;
 import lotto.enums.LottoRule;
 import lotto.enums.UserInterfaceMessage;
 import org.junit.jupiter.api.BeforeEach;

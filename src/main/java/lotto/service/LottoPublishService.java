@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.Lotto;
+import lotto.repository.Lotto;
 import lotto.enums.LottoRule;
 import lotto.enums.UserInterfaceMessage;
 

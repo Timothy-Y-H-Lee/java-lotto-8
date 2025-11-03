@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.List;
 import java.util.Map;
-import lotto.Lotto;
+import lotto.repository.Lotto;
 import lotto.enums.UserInterfaceMessage;
 
 public class OutputView {
