@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.repository.Lotto;
+import lotto.service.LottoBonusService;
 import lotto.service.LottoInputDrawNumberService;
 import lotto.service.LottoPublishService;
 import lotto.view.InputView;
@@ -12,6 +13,7 @@ public class LottoController {
     private OutputView outputView;
     LottoPublishService lottoPublishService = LottoPublishService.getInstance();
     LottoInputDrawNumberService lottoInputDrawNumberService = LottoInputDrawNumberService.getInstance();
+    LottoBonusService lottoBonusService = LottoBonusService.getInstance();
 
     public LottoController() {
         this.inputView = new InputView();
@@ -22,6 +24,7 @@ public class LottoController {
         buyLotto();
         lottoPublish();
         saveDrawNumbers();
+        saveBonusNumbers();
     }
 
     private void saveDrawNumbers() {
@@ -50,6 +53,16 @@ public class LottoController {
         List<Lotto> lottos = lottoPublishService.getPublishedLottoNumbers();
         outputView.printPublishCount(lottos.size());
         outputView.printPublishedLottoNumbers(lottoPublishService.getPublishedLottoNumbers());
+    }
+
+    private void saveBonusNumbers() {
+        try {
+            lottoBonusService.setLottoBonusNumber(inputView.requestInputBonusNumbers(),
+                    lottoInputDrawNumberService.getLottoDrawNumber());
+        } catch (IllegalArgumentException e) {
+            inputView.printMessage(e.getMessage());
+            this.saveBonusNumbers();
+        }
     }
 }
 
