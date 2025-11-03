@@ -19,6 +19,10 @@ public class LottoBonusService {
         return LottoBonusServiceHolder.LOTTO_BONUS_SERVICE;
     }
 
+    public Integer getLottoBonusNumber() {
+        return lottoBonus.getBonusNumber();
+    }
+
     public void setLottoBonusNumber(String bonusNumber, List<Integer> LottoNumber) throws IllegalArgumentException {
         lottoBonus = new LottoBonus(validateNumberFormat(bonusNumber), LottoNumber);
     }
@@ -32,9 +36,5 @@ public class LottoBonusService {
                     LottoRule.START.getValue(), LottoRule.END.getValue()));
         }
         return parsedBonusNumber;
-    }
-
-    public Integer getLottoBonusNumber() {
-        return lottoBonus.getBonusNumber();
     }
 }

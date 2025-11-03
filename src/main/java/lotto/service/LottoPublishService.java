@@ -11,15 +11,17 @@ import lotto.enums.UserInterfaceMessage;
 
 public class LottoPublishService {
     private List<Lotto> publishedLottoNumbers = new ArrayList<>();
+
+    public Integer getLottoPrice() {
+        return lottoPrice;
+    }
+
     private Integer lottoPrice;
     private Integer boughtLottoCount;
 
     private LottoPublishService() {
     }
 
-    public Integer getLottoPrice() {
-        return lottoPrice;
-    }
 
     private static class LottoPublishServiceHolder {
         final static LottoPublishService LOTTO_PUBLISH_SERVICE = new LottoPublishService();
@@ -29,17 +31,11 @@ public class LottoPublishService {
         return LottoPublishServiceHolder.LOTTO_PUBLISH_SERVICE;
     }
 
-    /**
-     * publishedLottoNumbers 초기화
-     */
+    // 상태 초기화
     public void clearPublishedLottoNumbers() {
         publishedLottoNumbers = new ArrayList<>();
     }
 
-    /**
-     * 구매 금액만큼, 로또 게임 당 로또 번호들을 생성하여 저장한다.
-     * @param price
-     */
     public void lottoPublish(String price) {
         lottoPrice = String2Integer(price);
         boughtLottoCount(lottoPrice);
@@ -52,8 +48,11 @@ public class LottoPublishService {
         List<Integer> numbers = Randoms.pickUniqueNumbersInRange(LottoRule.START.getValue(),
                 LottoRule.END.getValue(),
                 LottoRule.LOTTO_MAX_COUNT.getValue());
-        numbers.sort(Comparator.naturalOrder());
         publishedLottoNumbers.add(new Lotto(numbers));
+    }
+
+    public List<Lotto> getPublishedLottoNumbers() {
+        return publishedLottoNumbers;
     }
 
     private Integer String2Integer(String numberformat) {
@@ -69,9 +68,5 @@ public class LottoPublishService {
 
     private void boughtLottoCount(Integer lottoPrice) {
         boughtLottoCount = lottoPrice / LottoRule.LOTTO_PRICE.getValue();
-    }
-
-    public List<Lotto> getPublishedLottoNumbers() {
-        return publishedLottoNumbers;
     }
 }
